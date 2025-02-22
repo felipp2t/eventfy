@@ -8,6 +8,7 @@ import {
   serializerCompiler,
   validatorCompiler,
 } from 'fastify-type-provider-zod'
+import { env } from './env'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -32,6 +33,6 @@ app.register(fastifyCors)
 
 app
   .listen({
-    port: 3333,
+    port: env.PORT,
   })
   .then(() => console.log('Server is running on port 3333'))
