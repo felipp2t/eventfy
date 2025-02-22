@@ -5,6 +5,7 @@ export const events = pgTable('events', {
   name: text('name').notNull(),
   description: text('description').notNull(),
   slug: text('slug').notNull().unique(),
+  date: timestamp('date').notNull(),
   created_at: timestamp('created_at').notNull().defaultNow(),
   updated_at: timestamp('updated_at').notNull().defaultNow(),
 })

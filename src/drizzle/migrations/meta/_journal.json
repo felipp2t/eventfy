@@ -8,6 +8,13 @@
       "when": 1740254168515,
       "tag": "0000_chemical_mentor",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1740254628303,
+      "tag": "0001_ancient_winter_soldier",
+      "breakpoints": true
     }
   ]
 }
