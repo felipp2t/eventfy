@@ -1,0 +1,11 @@
+@baseUrl=http://localhost:3333
+
+# @name createEvent
+POST {{baseUrl}}/events 
+Content-Type: application/json
+
+{
+    "name": "Event 1",
+    "description": "Event 1 description",
+    "date": "2025-04-12"
+}
