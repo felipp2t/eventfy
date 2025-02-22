@@ -1,6 +1,9 @@
+import { fastifyCors } from '@fastify/cors'
 import fastify from 'fastify'
 
 const app = fastify()
+
+app.register(fastifyCors)
 
 app.get('/', async (request, reply) => {
   return { message: 'Hello, World!' }
