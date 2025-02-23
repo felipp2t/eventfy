@@ -37,17 +37,29 @@ export const subscribeToEventRoute: FastifyPluginAsyncZod = async app => {
       const { name, email } = request.body
       const { eventId } = request.params
 
+<<<<<<< HEAD
       const response = await subscribeToEvent({
+=======
+      const resposne = await subscribeToEvent({
+>>>>>>> 3fadc04990c9db9774d86da209069bf2ef76250d
         name,
         email,
         eventId,
       })
 
+<<<<<<< HEAD
       if (response.isLeft()) {
         return { message: response.value.message }
       }
 
       const { subscriptionId } = response.value
+=======
+      if (resposne.isLeft()) {
+        return { message: resposne.value.message }
+      }
+
+      const { subscriptionId } = resposne.value
+>>>>>>> 3fadc04990c9db9774d86da209069bf2ef76250d
 
       return { subscriptionId }
     }
