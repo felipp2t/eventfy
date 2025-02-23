@@ -9,9 +9,9 @@ import {
   validatorCompiler,
 } from 'fastify-type-provider-zod'
 import { env } from './env'
+import { cancelSubscriptionRoute } from './routes/cancel-subscription-route'
 import { createEventRoute } from './routes/create-event-route'
 import { subscribeToEventRoute } from './routes/subscribe-to-event-route'
-import { cancelSubscriptionRoute } from './routes/cancel-subscription-route'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -34,9 +34,14 @@ app.register(fastifySwaggerUi, {
 
 app.register(fastifyCors)
 
-app.register(createEventRoute)
-app.register(subscribeToEventRoute)
-app.register(cancelSubscriptionRoute)
+app.register(
+  async instance => {
+    instance.register(createEventRoute)
+    instance.register(subscribeToEventRoute)
+    instance.register(cancelSubscriptionRoute)
+  },
+  { prefix: '/api' }
+)
 
 app
   .listen({
