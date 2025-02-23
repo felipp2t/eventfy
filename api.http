@@ -1,5 +1,6 @@
 @baseUrl=http://localhost:3333
 @eventId={{createEvent.response.body.eventId}}
+@subscriptionId={{subscribeToEvent.response.body.subscriptionId}}
 
 # @name createEvent
 
@@ -7,7 +8,7 @@ POST {{baseUrl}}/events
 Content-Type: application/json
 
 {
-    "name": "Event 1",
+    "name": "Event 2",
     "description": "Event 1 description",
     "date": "2025-04-12"
 }
@@ -21,7 +22,13 @@ Content-Type: application/json
 
 {
     "name": "John Doe",
-    "email": "john.doe@gmail.com"
+    "email": "john.doe2@gmail.com"
 }
+
+###
+
+# @name cancelToEvent
+
+DELETE {{baseUrl}}/subscriptions/{{subscriptionId}}
 
 

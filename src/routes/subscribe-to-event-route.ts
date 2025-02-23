@@ -1,6 +1,5 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import z from 'zod'
-import { env } from '../env'
 import { subscribeToEvent } from '../functions/subscribe-to-event'
 
 const bodySchema = z.object({
@@ -12,7 +11,7 @@ const bodySchema = z.object({
 })
 
 const paramsSchema = z.object({
-  eventId: z.string()
+  eventId: z.string(),
 })
 
 export const subscribeToEventRoute: FastifyPluginAsyncZod = async app => {
@@ -25,11 +24,13 @@ export const subscribeToEventRoute: FastifyPluginAsyncZod = async app => {
         body: bodySchema,
         params: paramsSchema,
         response: {
-          302: z.null(),
+          201: z.object({
+            subscriptionId: z.string().uuid(),
+          }),
         },
       },
     },
-    async (request, reply) => {
+    async request => {
       const { name, email } = request.body
       const { eventId } = request.params
 
@@ -39,10 +40,7 @@ export const subscribeToEventRoute: FastifyPluginAsyncZod = async app => {
         eventId,
       })
 
-      return reply.redirect(
-        `${env.WEB_URL}/events/${subscriptionId}/ticket`,
-        302
-      )
+      return { subscriptionId }
     }
   )
 }

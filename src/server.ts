@@ -11,6 +11,7 @@ import {
 import { env } from './env'
 import { createEventRoute } from './routes/create-event-route'
 import { subscribeToEventRoute } from './routes/subscribe-to-event-route'
+import { cancelSubscriptionRoute } from './routes/cancel-subscription-route'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -35,6 +36,7 @@ app.register(fastifyCors)
 
 app.register(createEventRoute)
 app.register(subscribeToEventRoute)
+app.register(cancelSubscriptionRoute)
 
 app
   .listen({
