@@ -22,7 +22,7 @@ export const cancelSubscriptionRoute: FastifyPluginAsyncZod = async app => {
       const { subscriptionId } = request.params
 
       await cancelSubscription({ subscriptionId })
-      
+
       return reply.redirect(env.WEB_URL, 204)
     }
   )

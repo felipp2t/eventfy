@@ -1,7 +1,13 @@
 import { relations } from 'drizzle-orm'
-import { pgTable, uuid } from 'drizzle-orm/pg-core'
+import { pgEnum, pgTable, uuid } from 'drizzle-orm/pg-core'
 import { events } from './events'
 import { participants } from './participants'
+
+export const eventParticipantsStatus = pgEnum('status', [
+  'ACTIVE',
+  'CANCELLED',
+  'USED',
+])
 
 export const eventParticipants = pgTable('event_participants', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -11,6 +17,7 @@ export const eventParticipants = pgTable('event_participants', {
   participantId: uuid('participant_id')
     .notNull()
     .references(() => participants.id),
+  status: eventParticipantsStatus('status').default('ACTIVE'),
 })
 
 export const eventParticipantsRelations = relations(
